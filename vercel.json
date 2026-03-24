@@ -5,7 +5,7 @@
   "installCommand": "npm ci",
   "framework": "nextjs",
   "env": {
-    "MONGODB_URI": "@mongodb_uri",
-    "DISCORD_WEBHOOK_URL": "@discord_webhook_url"
+    "MONGODB_URI": "@MONGODB_URI",
+    "DISCORD_WEBHOOK_URL": "@DISCORD_WEBHOOK_URL"
   }
 }
