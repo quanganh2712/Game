@@ -21,9 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-zinc-900 text-zinc-100">
+        <div className="min-h-screen bg-linear-to-b from-black via-zinc-950 to-zinc-900 text-zinc-100">
           <Header />
-          <main className="mx-auto w-full max-w-[1200px] px-4 pt-64 pb-10 sm:px-6 lg:px-8 sm:pt-72">
+          <main className="w-full px-4 py-10 sm:px-6 lg:px-10">
             {children}
           </main>
         </div>

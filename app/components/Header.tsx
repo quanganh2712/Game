@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navigationItems = [
-  { label: "Home", href: "/" },
+  { label: "Home", href: "/home" },
   { label: "Units", href: "/units" },
   { label: "Traits", href: "/traits" },
   { label: "Items", href: "/items" },
@@ -19,7 +19,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-zinc-950/60 backdrop-blur-xl">
+    <header className="border-b border-white/10 bg-zinc-950/60 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-3 px-4 py-4 sm:gap-4 sm:px-6 lg:px-8">
         <Image
           src="/celestial-odyssey-logo.svg"
