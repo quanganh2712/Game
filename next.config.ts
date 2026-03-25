@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    serverComponentsExternalPackages: ["@opennextjs/cloudflare"],
+  },
+  transpilePackages: ["@opennextjs/cloudflare"],
 };
 
 export default nextConfig;
