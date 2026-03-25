@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       return Response.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    const client = await clientPromise;
+    const client = await clientPromise();
     const db = client.db("game-wiki");
 
     const result = await db.collection("feedback").insertOne({

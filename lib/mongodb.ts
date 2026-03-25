@@ -1,10 +1,7 @@
 import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
-
-if (!uri) {
-  throw new Error("Please add MONGODB_URI to .env.local or Vercel secrets");
-}
+const dbName = process.env.MONGODB_DB || "game-wiki";
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
@@ -14,11 +11,17 @@ declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-if (!global._mongoClientPromise) {
-  client = new MongoClient(uri);
-  global._mongoClientPromise = client.connect();
-}
+const getClientPromise = () => {
+  if (!uri) {
+    throw new Error("Please add MONGODB_URI to .env.local or Vercel secrets");
+  }
 
-clientPromise = global._mongoClientPromise;
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri);
+    global._mongoClientPromise = client.connect();
+  }
 
-export default clientPromise;
+  return global._mongoClientPromise;
+};
+
+export default getClientPromise;

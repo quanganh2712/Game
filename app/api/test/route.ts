@@ -2,7 +2,7 @@ import clientPromise from "@/lib/mongodb";
 
 export async function GET() {
   try {
-    const client = await clientPromise;
+    const client = await clientPromise();
     const db = client.db("game-wiki");
 
     // test insert
