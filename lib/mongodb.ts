@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGO_URL;
 
 if (!uri) {
   throw new Error("Please add MONGODB_URI to .env.local or Vercel secrets");
