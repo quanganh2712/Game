@@ -1,28 +1,24 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI!;
+const uri = process.env.MONGODB_URI;
 
 if (!uri) {
-  throw new Error("Please add MONGODB_URI to .env.local");
+  throw new Error("Please add MONGODB_URI to .env.local or Vercel secrets");
 }
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
 
 declare global {
+  // eslint-disable-next-line no-var
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-if (process.env.NODE_ENV === "development") {
-  // tránh tạo nhiều connection khi dev
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri);
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
+if (!global._mongoClientPromise) {
   client = new MongoClient(uri);
-  clientPromise = client.connect();
+  global._mongoClientPromise = client.connect();
 }
+
+clientPromise = global._mongoClientPromise;
 
 export default clientPromise;
