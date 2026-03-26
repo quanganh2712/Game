@@ -3,9 +3,5 @@
   "outputDirectory": ".next",
   "devCommand": "npm run dev",
   "installCommand": "npm ci",
-  "framework": "nextjs",
-  "env": {
-    "MONGODB_URI": "@MONGODB_URI",
-    "DISCORD_WEBHOOK_URL": "@DISCORD_WEBHOOK_URL"
-  }
+  "framework": "nextjs"
 }
