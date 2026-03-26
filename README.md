@@ -97,33 +97,52 @@ Required repository secrets:
 
 ## Deploy on Cloudflare
 
-1. Set the same environment variables in Cloudflare Worker settings:
-   - `MONGODB_URI`
-   - `DISCORD_WEBHOOK_URL`
-2. Build OpenNext output:
-
-```bash
-npm run build:cloudflare
-```
-
-3. Deploy to Cloudflare Workers:
-
-```bash
-npm run deploy:cloudflare
-```
-
-`deploy:cloudflare` now runs a clean build first, then deploys.
-
-### Auto deploy from GitHub (recommended)
+### Option 1: Deploy via GitHub Actions (recommended for CI/CD)
 
 This repository includes GitHub Action workflow:
 
 - `.github/workflows/deploy-cloudflare.yml`
 
+This workflow automatically:
+1. Checks out code on push to main/master
+2. Installs dependencies
+3. Runs `npm run build:cloudflare` to generate OpenNext artifacts
+4. Deploys using Wrangler CLI to Cloudflare Workers
+
 Required repository secrets:
 
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN` - Create at [Cloudflare Dashboard → API Tokens](https://dash.cloudflare.com/profile/api-tokens)
+- `CLOUDFLARE_ACCOUNT_ID` - Your Cloudflare Account ID
+
+### Option 2: Deploy via Cloudflare Pages connected to GitHub
+
+If connecting Cloudflare Pages directly to your GitHub repo:
+
+1. Create a new Cloudflare Pages project
+2. Connect your GitHub repository
+3. Cloudflare will automatically detect build configuration from:
+   - `wrangler.toml` (primary)
+   - `wrangler.jsonc` (fallback)
+4. Both files specify: `command = "npm run build:cloudflare"`
+5. Set these environment variables in Cloudflare Pages project settings:
+   - `MONGODB_URI`
+   - `DISCORD_WEBHOOK_URL`
+
+### Option 3: Local deployment to Cloudflare Workers
+
+Build OpenNext output:
+
+```bash
+npm run build:cloudflare
+```
+
+Deploy to Cloudflare Workers:
+
+```bash
+npm run deploy:cloudflare
+```
+
+`deploy:cloudflare` runs a clean build first, then deploys. Note: This may fail on Windows with symlink permission (`EPERM`) — use GitHub Actions or WSL instead.
 
 ### Windows note
 

@@ -3,6 +3,9 @@
   "name": "celestial-odyssey-wiki",
   "compatibility_date": "2025-09-27",
   "main": ".open-next/worker.js",
+  "build": {
+    "command": "npm run build:cloudflare"
+  },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"

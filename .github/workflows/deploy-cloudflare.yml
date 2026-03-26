@@ -33,4 +33,9 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+          preCommands: echo ""
+          postCommands: echo ""
+          secrets: MONGODB_URI,DISCORD_WEBHOOK_URL
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}

@@ -1,0 +1,21 @@
+name = "celestial-odyssey-wiki"
+compatibility_date = "2025-09-27"
+main = ".open-next/worker.js"
+
+[build]
+command = "npm run build:cloudflare"
+
+[env.production]
+routes = [
+  { pattern = "celestial-odyssey-wiki.workers.dev/*", zone_name = "workers.dev" }
+]
+
+[observability]
+enabled = true
+
+[compatibility_flags]
+compatibility_flags = ["nodejs_compat"]
+
+[[assets]]
+directory = ".open-next/assets"
+binding = "ASSETS"
