@@ -27,8 +27,8 @@ export async function POST(req: Request) {
       createdAt: new Date(),
     });
 
-    // 🔔 DISCORD WEBHOOK (SAFE + CLEAN)
-    const discordRes = await fetch(process.env.DISCORD_WEBHOOK_URL!, {
+    // 🔔 DISCORD WEBHOOK (PING ROLE)
+    await fetch(process.env.DISCORD_WEBHOOK_URL!, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,12 +41,11 @@ export async function POST(req: Request) {
 📝 **Subject:** ${subject || "No subject"}
 
 💬 **Description:**
-${description.slice(0, 800)}`
+${description.slice(0, 800)}`,
+
+        
       }),
     });
-
-    // debug (rất nên giữ)
-    console.log("Discord status:", discordRes.status);
 
     return Response.json({ success: true, id: result.insertedId });
   } catch (err) {

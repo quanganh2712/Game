@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && opennextjs-cloudflare build",
+    "build": "next build",
+    "clean:cloudflare": "node -e \"const fs=require('fs');const p='.open-next';if(fs.existsSync(p)){fs.rmSync(p,{recursive:true,force:true});console.log('Removed .open-next');}else{console.log('No .open-next to remove');}\"",
+    "build:cloudflare": "npm run clean:cloudflare && opennextjs-cloudflare build",
+    "preview:cloudflare": "opennextjs-cloudflare preview",
+    "deploy:cloudflare": "npm run build:cloudflare && opennextjs-cloudflare deploy",
     "start": "next start"
   },
   "dependencies": {

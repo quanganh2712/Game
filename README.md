@@ -47,6 +47,12 @@ npm run build
 npm run start
 ```
 
+Build for Cloudflare Workers (OpenNext):
+
+```bash
+npm run build:cloudflare
+```
+
 ## Environment Variables
 
 See `.env.example` for required environment variables:
@@ -76,3 +82,51 @@ To learn more about Next.js, take a look at the following resources:
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+### Auto deploy from GitHub (recommended)
+
+This repository includes GitHub Action workflow:
+
+- `.github/workflows/deploy-vercel.yml`
+
+Required repository secrets:
+
+- `VERCEL_TOKEN`
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+## Deploy on Cloudflare
+
+1. Set the same environment variables in Cloudflare Worker settings:
+   - `MONGODB_URI`
+   - `DISCORD_WEBHOOK_URL`
+2. Build OpenNext output:
+
+```bash
+npm run build:cloudflare
+```
+
+3. Deploy to Cloudflare Workers:
+
+```bash
+npm run deploy:cloudflare
+```
+
+`deploy:cloudflare` now runs a clean build first, then deploys.
+
+### Auto deploy from GitHub (recommended)
+
+This repository includes GitHub Action workflow:
+
+- `.github/workflows/deploy-cloudflare.yml`
+
+Required repository secrets:
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+### Windows note
+
+Cloudflare OpenNext build can fail on Windows with symlink permission (`EPERM`).
+If you hit this locally, deploy via GitHub Actions (Linux runner) or use WSL.
+Running terminal as Administrator and enabling Developer Mode can also help on Windows.
